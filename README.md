@@ -1,5 +1,44 @@
 # About
-Collection of Assignments for Concordia's SOEN 363 Data Systems for Software Engineers
+Repo containing the project for Concordia's Data Systems for Software Engineers (SOEN-363) course.
+
+## Team Members
+
+| Name            | Student ID |
+| --------------- | ---------- |
+| Nathan Grenier  | 40250986   |
+| Nathanial Hwong | 40243583   |
+
+## Setting Environment Variables
+Set these env variables before running any commands:
+
+PostgreSQL:
+- POSTGRES_DB
+- POSTGRES_USER
+- POSTGRES_PASSWORD
+
+PG Admin:
+- PGADMIN_DEFAULT_EMAIL
+- PGADMIN_DEFAULT_PASSWORD
+
+## Using Docker (PostgreSQL Container)
+> You should [install docker]() for you system before starting.
+
+Both the Postgres instance and database management tool (pgAdmin) are configured in the `docker-compose.yml` file.
+
+1. To run both services, use `docker compose up`.
+    > You can run the container in "detached" mode by appending the `-d` flag to the command above.
+2. Next, check that both services are running with `docker container ls`.
+3. Copy the "postgres" services docker id (ex: 1fc60e0e538d).
+4. Inspect the details of the postgres container using `docker inspect {postgres id}`.
+5. Search for the `IPAddress` attribute of the postgres database and keep note of it.
+6. Open `http://localhost:5050/` to view the pgAdmin webpage.
+7. Click on the "Add New Server" Quick Link in pgAdmin to add the postgres instance.
+8. In the General tab: 
+   - Give the postgres server a name.
+9. In the Connection Tab: 
+   - Enter the postgres container's ip address
+   - Enter the same username as in the `.env` file (POSTGRES_USER) 
+   - Enter the same password as in the `.env` file (POSTGRES_PASSWORD)
 
 ## Using plantUML
 

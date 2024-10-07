@@ -1,0 +1,7 @@
+@startuml
+skinparam linetype ortho
+
+!define PK <&key>
+!define FK <&link-intact>
+
+@enduml
