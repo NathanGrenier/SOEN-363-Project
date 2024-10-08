@@ -21,7 +21,7 @@ PG Admin:
 - PGADMIN_DEFAULT_PASSWORD
 
 ## Using Docker (PostgreSQL Container)
-> You should [install docker]() for you system before starting.
+> You should [install docker](https://docs.docker.com/engine/install/) for you system before starting.
 
 Both the Postgres instance and database management tool (pgAdmin) are configured in the `docker-compose.yml` file.
 
