@@ -1,26 +1,28 @@
-# Project Proposal and Non-Functional Requirements
-Your topic: Tracking SpaceX Launch Details
+# Project Proposal
 
-Database Project Phase N(0)
+Database Project Phase 0
 
 SOEN 363: Data Systems for Software Engineers
 
 # 1. Description 
+**Topic:** Tracking SpaceX Launch Details
 
- 
+This project aims to create a comprehensive database on historical SpaceX rocket launches by integrating data from multiple sources. The goal is to create a simple yet complete structure for all SpaceX rocket launches, ensuring that all key aspects of the launch data are captured and organized efficiently. 
 
 # 2. Implementation details 
 
 ## 2.1 Data Sources
 
-| Source                            | Type | Docs                                   |
-| --------------------------------- | ---- | -------------------------------------- |
-| https://www.rocketlaunch.live/api | REST | https://www.rocketlaunch.live/api      |
-| https://api.spacexdata.com/       | REST | https://github.com/r-spacex/SpaceX-API |
+| Source                            | API Type | Docs                                   |
+| --------------------------------- | -------- | -------------------------------------- |
+| https://www.rocketlaunch.live/api | REST     | https://www.rocketlaunch.live/api      |
+| https://api.spacexdata.com/       | REST     | https://github.com/r-spacex/SpaceX-API |
 
 ### Proposed Entity Relation Diagram
 
-- A brief description of what will be included in the database. A list of high-level entities would be a plus.
+ER Diagram Representing the Proposed Database:
+
+![ER Diagram](/diagrams/out/ER-diagram/ER-diagram.png)
 ## 2.2 Implementation Platforms
 
 **RDBMS:** PostgreSQL
@@ -41,26 +43,19 @@ You may use any programming language of your choice for API consumption, data po
 
 | Date       | Data Size |
 | ---------- | --------- |
-| 2024/10/14 | 40MB      |
-| 2024/10/15 | 40MB      |
-| 2024/10/16 | 40MB      |
-| 2024/10/17 | 40MB      |
-| 2024/10/18 | 40MB      |
-| 2024/10/19 | 40MB      |
-| 2024/10/20 | 40MB      |
-| 2024/10/21 | 40MB      |
-| 2024/10/22 | 40MB      |
-| 2024/10/23 | 40MB      |
-| 2024/10/24 | 40MB      |
-| 2024/10/25 | 40MB      |
-| 2024/10/26 | 40MB      |
-
-
-# Requirements
-
-- [ ] You must collect the data from at least two different public data sources. Note that you will need to demonstrate the data collection process during your project presentation.
-- [ ] You must show a use of public API in your data collection. Note that many public free APIs have limited bandwidth. You must plan your data collection accordingly.
-- [ ] Your database must contain a large data set. While this may be subjective, a database of size 300MB and above may be a good example of a large data set. Ideally, a couple of Gigabytes would be ideal.
+| 2024/10/14 | ~40MB     |
+| 2024/10/15 | ~40MB     |
+| 2024/10/16 | ~40MB     |
+| 2024/10/17 | ~40MB     |
+| 2024/10/18 | ~40MB     |
+| 2024/10/19 | ~40MB     |
+| 2024/10/20 | ~40MB     |
+| 2024/10/21 | ~40MB     |
+| 2024/10/22 | ~40MB     |
+| 2024/10/23 | ~40MB     |
+| 2024/10/24 | ~40MB     |
+| 2024/10/25 | ~40MB     |
+| 2024/10/26 | ~40MB     |
 
 ## Notes
 

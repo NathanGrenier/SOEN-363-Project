@@ -1,7 +1,21 @@
-@startuml
+@startuml ER-diagram
 skinparam linetype ortho
 
 !define PK <&key>
 !define FK <&link-intact>
+
+entity Launch {}
+
+entity Crew {}
+
+entity Ships {}
+
+entity Rockets {}
+
+entity Capsules {}
+
+entity Payloads {}
+
+entity Launchpads {}
 
 @enduml

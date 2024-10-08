@@ -27,7 +27,7 @@ Both the Postgres instance and database management tool (pgAdmin) are configured
 
 1. To run both services, use `docker compose up`.
     > You can run the container in "detached" mode by appending the `-d` flag to the command above.
-2. Next, check that both services are running with `docker container ls`.
+2. Next, check that both services are running with `docker ps`.
 3. Copy the "postgres" services docker id (ex: 1fc60e0e538d).
 4. Inspect the details of the postgres container using `docker inspect {postgres id}`.
 5. Search for the `IPAddress` attribute of the postgres database and keep note of it.
@@ -35,10 +35,12 @@ Both the Postgres instance and database management tool (pgAdmin) are configured
 7. Click on the "Add New Server" Quick Link in pgAdmin to add the postgres instance.
 8. In the General tab: 
    - Give the postgres server a name.
+    > ![](/static/pgAdmin-General.png)
 9. In the Connection Tab: 
    - Enter the postgres container's ip address
    - Enter the same username as in the `.env` file (POSTGRES_USER) 
    - Enter the same password as in the `.env` file (POSTGRES_PASSWORD)
+    > ![](/static/pgAdmin-Connection.png)
 
 ## Using plantUML
 
