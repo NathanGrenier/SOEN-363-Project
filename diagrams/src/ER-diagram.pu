@@ -4,18 +4,12 @@ skinparam linetype ortho
 !define PK <&key>
 !define FK <&link-intact>
 
-entity Launch {}
+entity Books {}
 
-entity Crew {}
+entity Categories {}
 
-entity Ships {}
+entity Authors {}
 
-entity Rockets {}
-
-entity Capsules {}
-
-entity Payloads {}
-
-entity Launchpads {}
+entity Publishers {}
 
 @enduml

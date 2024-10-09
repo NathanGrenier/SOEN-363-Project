@@ -5,18 +5,18 @@ Database Project Phase 0
 SOEN 363: Data Systems for Software Engineers
 
 # 1. Description 
-**Topic:** Tracking SpaceX Launch Details
+**Topic:** Library of Alexandria
 
-This project aims to create a comprehensive database on historical SpaceX rocket launches by integrating data from multiple sources. The goal is to create a simple yet complete structure for all SpaceX rocket launches, ensuring that all key aspects of the launch data are captured and organized efficiently. 
+This project aims to create a comprehensive database of books by integrating data from multiple sources. The goal is to create a simple yet complete structure for data on various book entries found on public sources.
 
 # 2. Implementation details 
 
 ## 2.1 Data Sources
 
-| Source                            | API Type | Docs                                   |
-| --------------------------------- | -------- | -------------------------------------- |
-| https://www.rocketlaunch.live/api | REST     | https://www.rocketlaunch.live/api      |
-| https://api.spacexdata.com/       | REST     | https://github.com/r-spacex/SpaceX-API |
+| Source                                     | API Type | Docs                                                                                                          |
+| ------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------------- |
+| https://openlibrary.org/developers/api     | REST     | https://openlibrary.org/developers/api                                                                        |
+| https://reststop.randomhouse.com/resources | REST     | https://www.penguinrandomhouse.biz/webservices/rest/, https://developer.penguinrandomhouse.com/docs/read/Home |
 
 ### Proposed Entity Relation Diagram
 
@@ -33,9 +33,8 @@ ER Diagram Representing the Proposed Database:
 
 ## 2.3 Programming Platform 
 
-You may use any programming language of your choice for API consumption, data population, and database instance creation.
-- Programming platform: Language platform (for API consumption) and/or scripting language or any other intermediate tools that you plan to use.
-
+- Python (scraping, formatting/normalizing)
+- Docker (hosting)
 
 # 3. Estimated Data Collection Plan  
 

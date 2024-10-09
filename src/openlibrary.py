@@ -2,7 +2,7 @@ import json
 
 import requests
 
-API_URL = "https://api.spacexdata.com/v4"
+API_URL = "https://openlibrary.org/"
 DUMP_DATA_PATH = "./dump/raw_data/"
 
 
