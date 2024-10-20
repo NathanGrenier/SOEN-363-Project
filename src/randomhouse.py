@@ -14,7 +14,7 @@ load_dotenv()
 API_URL = "https://api.penguinrandomhouse.com/resources/v2"
 DUMP_DATA_PATH = "./dump/raw_data/randomhouse/"
 API_KEY = os.getenv("RANDOMHOUSE_API_KEY")
-API_DOMAIN = "PRH.US"  # We'll on;y consider the US domain (books available in the US).
+API_DOMAIN = "PRH.US"  # We'll only consider the US domain (books available in the US).
 
 
 def test():
