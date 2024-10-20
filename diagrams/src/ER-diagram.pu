@@ -4,7 +4,9 @@ skinparam linetype ortho
 !define PK <&key>
 !define FK <&link-intact>
 
-entity Books {}
+entity Books {
+  name
+}
 
 entity Categories {}
 
