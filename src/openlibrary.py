@@ -3,7 +3,7 @@ import json
 import requests
 
 API_URL = "https://openlibrary.org/"
-DUMP_DATA_PATH = "./dump/raw_data/"
+DUMP_DATA_PATH = "./dump/raw_data/openlibrary/"
 
 
 def getLaunches():

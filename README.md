@@ -20,6 +20,9 @@ PG Admin:
 - PGADMIN_DEFAULT_EMAIL
 - PGADMIN_DEFAULT_PASSWORD
 
+API: 
+- RANDOMHOUSE_API_KEY
+
 ## Using Docker (PostgreSQL Container)
 > You should [install docker](https://docs.docker.com/engine/install/) for you system before starting.
 
