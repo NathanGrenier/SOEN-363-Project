@@ -1,0 +1,111 @@
+@startuml ER-Diagram
+title ER Diagram
+skinparam linetype ortho
+
+!define PK <&key>
+!define FK <&link-intact>
+
+entity Book {
+    PK B_ID : int
+    --
+    B_TITLE: string
+    B_SUBTITLE: string
+    B_ISBN13: ISBN13   
+    B_ISBN10: ISBN10
+    B_PUBLISHER: string
+    B_PUBLISH_DATE: date
+    B_DESCRIPTION: string
+    B_PAGE_COUNT: int
+    B_AVERAGE_RATING: float
+    B_RATING_COUNT: int
+    B_LANGUAGE: VARCHAR(2)
+    B_IS_PHYSICAL: boolean
+    /B_AWARD_COUNT: int
+}
+enum Cover_Type {
+    HARDCOVER
+    PAPERBACK
+}
+entity Physical_Book {
+    PK FK B_ID: int
+    --
+    PB_COVER_TYPE: Cover_Type
+    PB_LENGTH: float
+    PB_WIDTH: float
+    PB_DEPTH: float
+    PB_WEIGHT: float
+}
+entity Ebook {
+    PK FK B_ID: int
+    --
+    EB_BUY_URL: string
+    EB_IS_GIFTABLE: boolean
+}
+
+entity Category {
+    PK C_ID: int
+    --
+    C_NAME: string
+}
+entity Book_Category {
+    PK FK C_ID: int
+    PK FK B_ID: int
+}
+
+entity Author {
+    PK A_ID: int
+    --
+    A_NAME: string
+}
+entity Book_Author{
+    PK FK B_ID: int
+    PK FK A_ID: int
+}
+
+enum Currency_Type {
+    USD
+    CAD
+}
+entity Price {
+    PK P_ID int
+    --
+    FK B_ID: int
+    P_PRICE: float
+    P_CURRENCY: Currency_Type
+}
+
+entity Award {
+    PK AW_ID: int
+    --
+    FK B_ID: int
+    AW_NAME: string
+    AW_YEAR: int
+    AW_LEVEL: string
+}
+
+entity Keywords {
+    PK K_ID: int
+    PK FK B_ID: int
+    --
+    K_NAME: string
+}
+
+Cover_Type -up- Physical_Book
+
+Book <|.. Physical_Book: IS-A {exclusive}
+Book <|.. Ebook: IS-A {exclusive}
+
+Book ||.left.|{ Book_Author
+Book_Author }o-left-|| Author
+
+Book ||.right.o{ Book_Category
+Book_Category }o-right-|| Category
+
+Currency_Type -- Price
+
+Book ||..o{ Price
+
+Book ||.up.o{ Award
+
+Book ||.up.o{ Keywords
+@enduml

@@ -1,0 +1,179 @@
+CREATE TYPE Currency_Type AS ENUM (
+    'USD',
+    'CAD'
+);
+
+CREATE TYPE COVER_TYPE AS ENUM (
+    'Paperback',
+    'Hardcover'
+);
+
+CREATE DOMAIN ISBN13 AS VARCHAR(13)
+    CHECK (
+        VALUE ~ '^\d{13}$' AND
+        (
+            (10 - ((SUBSTRING(VALUE FROM 1 FOR 1)::INTEGER * 1 +
+            SUBSTRING(VALUE FROM 2 FOR 1)::INTEGER * 3 +
+            SUBSTRING(VALUE FROM 3 FOR 1)::INTEGER * 1 +
+            SUBSTRING(VALUE FROM 4 FOR 1)::INTEGER * 3 +
+            SUBSTRING(VALUE FROM 5 FOR 1)::INTEGER * 1 +
+            SUBSTRING(VALUE FROM 6 FOR 1)::INTEGER * 3 +
+            SUBSTRING(VALUE FROM 7 FOR 1)::INTEGER * 1 +
+            SUBSTRING(VALUE FROM 8 FOR 1)::INTEGER * 3 +
+            SUBSTRING(VALUE FROM 9 FOR 1)::INTEGER * 1 +
+            SUBSTRING(VALUE FROM 10 FOR 1)::INTEGER * 3 +
+            SUBSTRING(VALUE FROM 11 FOR 1)::INTEGER * 1 +
+            SUBSTRING(VALUE FROM 12 FOR 1)::INTEGER * 3 +
+            ) % 10)) = 
+            CASE  
+                WHEN SUBSTRING(VALUE FROM 13 FOR 1) = '0' THEN 10
+                ELSE SUBSTRING(VALUE FROM 13 FOR 1)::INTEGER
+            END
+        )
+    );
+
+CREATE DOMAIN ISBN10 AS VARCHAR(10)
+    CHECK (
+        VALUE ~ '^\d{9}[\dX]$' AND
+        (
+            (11 - ((SUBSTRING(VALUE FROM 1 FOR 1)::INTEGER * 10 +
+            SUBSTRING(VALUE FROM 2 FOR 1)::INTEGER * 9 +
+            SUBSTRING(VALUE FROM 3 FOR 1)::INTEGER * 8 +
+            SUBSTRING(VALUE FROM 4 FOR 1)::INTEGER * 7 +
+            SUBSTRING(VALUE FROM 5 FOR 1)::INTEGER * 6 +
+            SUBSTRING(VALUE FROM 6 FOR 1)::INTEGER * 5 +
+            SUBSTRING(VALUE FROM 7 FOR 1)::INTEGER * 4 +
+            SUBSTRING(VALUE FROM 8 FOR 1)::INTEGER * 3 +
+            SUBSTRING(VALUE FROM 9 FOR 1)::INTEGER * 2
+            ) % 11)) = 
+            CASE 
+                WHEN SUBSTRING(VALUE FROM 10 FOR 1) = 'X' THEN 10
+                WHEN SUBSTRING(VALUE FROM 10 FOR 1) = '0' THEN 11
+                ELSE SUBSTRING(VALUE FROM 10 FOR 1)::INTEGER
+            END
+        )
+    );
+
+CREATE TABLE Book (
+    B_ID INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    B_Title VARCHAR(200) NOT NULL,
+    B_SUBTITLE VARCHAR(200),
+    B_ISBN13 ISBN13 NOT NULL,
+    B_ISBN10 ISBN10,
+    B_PUBLISHER VARCHAR(100) NOT NULL,
+    B_PUBLISH_DATE DATE NOT NULL,
+    B_DESCRIPTION TEXT,
+    B_PAGE_COUNT INT NOT NULL,
+    B_AVERAGE_RATING DECIMAL(2, 1),
+    B_RATING_COUNT INT,
+    B_LANGUAGE VARCHAR(2) NOT NULL,
+    B_IS_PHYSICAL BOOLEAN NOT NULL,
+    B_AWARD_COUNT INT DEFAULT 0 NOT NULL
+);
+
+CREATE TABLE Award (
+    AW_ID INT PRIMARY KEY GENERATED DEFAULT AS IDENTITY,
+    AW_NAME VARCHAR(100) NOT NULL,
+    AW_YEAR INT NOT NULL,
+    AW_LEVEL VARCHAR(100),
+    B_ID INT REFERENCES Book(B_ID) ON DELETE CASCADE
+);
+
+CREATE OR REPLACE FUNCTION update_book_award_count()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- For UPDATE operations, update count for both old and new books
+    IF TG_OP = 'UPDATE' THEN
+        UPDATE Book
+        SET B_AWARD_COUNT = (
+            SELECT COUNT(*)
+            FROM Award
+            WHERE B_ID = OLD.B_ID
+        )
+        WHERE B_ID = OLD.B_ID;
+        
+        UPDATE Book
+        SET B_AWARD_COUNT = (
+            SELECT COUNT(*)
+            FROM Award
+            WHERE B_ID = NEW.B_ID
+        )
+        WHERE B_ID = NEW.B_ID;
+    ELSE
+        -- Handle INSERT and DELETE cases
+        UPDATE Book
+        SET B_AWARD_COUNT = (
+            SELECT COUNT(*)
+            FROM Award
+            WHERE B_ID = CASE
+                WHEN TG_OP = 'DELETE' THEN OLD.B_ID
+                ELSE NEW.B_ID
+            END
+        )
+        WHERE B_ID = CASE
+            WHEN TG_OP = 'DELETE' THEN OLD.B_ID
+            ELSE NEW.B_ID
+        END;
+    END IF;
+    
+    RETURN NULL;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER after_award_change
+AFTER INSERT OR UPDATE OR DELETE ON Award
+FOR EACH ROW
+EXECUTE FUNCTION update_book_award_count();
+
+CREATE TABLE Physical_Book (
+    B_ID INT PRIMARY KEY REFERENCES Book(B_ID) ON DELETE CASCADE,
+    PB_COVER_TYPE COVER_TYPE NOT NULL,
+    PB_LENGTH DECIMAL(6, 2),
+    PB_WIDTH DECIMAL(6, 2),
+    PB_DEPTH DECIMAL(6, 2),
+    PB_WEIGHT DECIMAL(7, 1)
+);
+
+CREATE TABLE Ebook (
+    B_ID INT PRIMARY KEY REFERENCES Book(B_ID) ON DELETE CASCADE,
+    EB_BUY_URL VARCHAR(200),
+    EB_IS_GIFTABLE BOOLEAN NOT NULL
+);
+
+CREATE TABLE Price (
+    P_ID INT PRIMARY KEY GENERATED DEFAULT AS IDENTITY,
+    P_PRICE DECIMAL(10, 2) NOT NULL,
+    P_CURRENCY Currency_Type NOT NULL,
+    B_ID INT REFERENCES Book(B_ID) ON DELETE CASCADE,
+);
+
+CREATE TABLE Category (
+    C_ID INT PRIMARY KEY GENERATED DEFAULT AS IDENTITY,
+    C_NAME VARCHAR(200) NOT NULL
+);
+
+CREATE TABLE Book_Category (
+    B_ID INT REFERENCES Book(B_ID) ON DELETE CASCADE,
+    C_ID INT REFERENCES Category(C_ID) ON DELETE CASCADE,
+    PRIMARY KEY (B_ID, C_ID)
+);
+
+CREATE TABLE Author (
+    A_ID INT PRIMARY KEY GENERATED DEFAULT AS IDENTITY,
+    A_NAME VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Book_Author (
+    B_ID INT REFERENCES Book(B_ID) ON DELETE CASCADE,
+    A_ID INT REFERENCES Author(A_ID) ON DELETE CASCADE,
+    PRIMARY KEY (B_ID, A_ID)
+);
+
+CREATE TABLE Keywords (
+    K_ID INT PRIMARY KEY GENERATED DEFAULT AS IDENTITY,
+    K_NAME VARCHAR(100) NOT NULL
+    B_ID INT NOT NULL REFERENCES Book(B_ID) ON DELETE CASCADE
+);
+
+-- TODO: Create a view
+-- - [ ] Examples of a hard-coded **views** that filters some rows and columns, based on the **user access rights** (i.e. a full access user may see all columns while a low-key user may only see certain columns and for a subset of data).
