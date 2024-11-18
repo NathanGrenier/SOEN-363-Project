@@ -11,15 +11,6 @@ Repo containing the project for Concordia's Data Systems for Software Engineers 
 ## Setting Environment Variables
 Set these env variables before running any commands:
 
-PostgreSQL:
-- POSTGRES_DB
-- POSTGRES_USER
-- POSTGRES_PASSWORD
-
-PG Admin:
-- PGADMIN_DEFAULT_EMAIL
-- PGADMIN_DEFAULT_PASSWORD
-
 API: 
 - RANDOMHOUSE_API_KEY
 
