@@ -104,6 +104,12 @@ To set the Jupyter Notebook's Kernel, click the following icon and select the ve
 
 <img src="static/noterbook-kernel-picker.gif" width="600" />
 
+## Dumping PostgreSQL Database
+
+You can generate a data dump of your postgres database by using the following command: `pg_dump -U postgres -d db -f data_backup.sql --data-only --column-inserts`.
+
+You can then run the file in pgadmin to populate the database. 
+
 ## Code Formatting and Linting
 
 I like using Ruff to format and lint my python code. This package is installed whenever you [install the project's dependencies](#installing-project-dependencies) and can be used with the following command:

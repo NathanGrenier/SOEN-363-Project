@@ -1,3 +1,6 @@
 .env
 .vscode/
 __pycache__/
+
+# Ignore pgdump file (can be removed if file size is < 50MB)
+data_backup.sql

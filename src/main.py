@@ -18,6 +18,6 @@ if __name__ == "__main__":
 
   fetchBookList(TOTAL_BOOKS, increment=INCREMENT)
 
-  failedISBNs = fetchAllBookDetails()
+  failedISBNs = fetchAllBookDetails(INCREMENT)
 
   # TODO: Prepare the data. Make sure to exclude failed ISBNs

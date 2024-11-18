@@ -61,7 +61,7 @@ def getBookDetails(ISBN):
 
 
 @timingDecorator
-def fetchAllBookDetails():
+def fetchAllBookDetails(increment: int):
   RANDOMHOUSE_PATH = f"{DATA_PATH}/randomhouse"
 
   totalBookCount = 0
@@ -74,7 +74,7 @@ def fetchAllBookDetails():
       with open(path, "r") as file:
         logger.debug(f"Reading data from {path}")
         data = json.load(file)
-        totalBookCount += 25
+        totalBookCount += increment
 
         for item in data["data"]["titles"]:
           isbn = item["isbn"]
@@ -87,8 +87,10 @@ def fetchAllBookDetails():
           result = getBookDetails(isbn)
           if result != "Success":
             failedISBNs.add(result)
-    if totalBookCount >= 100:
-      break
+
+    # For testing small amounts of requests
+    # if totalBookCount >= 100:
+    #   break
 
   if len(failedISBNs) > 0:
     logger.error(f"Failed to get data for {len(failedISBNs)}/{totalBookCount} books.")
