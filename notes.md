@@ -1,19 +1,19 @@
 # Part 0
-- Consume 2 APIs
+- [x] Consume 2 APIs
 
 # Part 1
 ## Database Design Requirements
-- [ ] Proper use of: 
+- [x] Proper use of: 
   - Keys
   - Indexes
   - Integrity constraints
-- [ ] How you provide the **link** between the two data sources (isbn)
-- [ ] At least 1 **IS-A** relationship
-- [ ] At least 1 example of a **weak entity**
-- [ ] An example of a complex referential integrity (i.e. using **assertions** or **triggers**).
-- [ ] Examples of a hard-coded **views** that filters some rows and columns, based on the **user access rights** (i.e. a full access user may see all columns while a low-key user may only see certain columns and for a subset of data).
-- [ ] Use of **domains** and **types**. (A couple examples)
-- [ ] Make sure that no **real domain data** (ex: isbn) is used as internal keys (primary / foreign)
+- [x] How you provide the **link** between the two data sources. Answer: We use the book's ISBN.
+- [x] At least 1 **IS-A** relationship
+- [x] At least 1 example of a **weak entity**
+- [x] An example of a complex referential integrity (i.e. using **assertions** or **triggers**).
+- [x] Use of **domains** and **types**. (A couple examples)
+- [x] Make sure that no **real domain data** (ex: isbn) is used as internal keys (primary / foreign)
+- [x] Examples of a hard-coded **views** that filters some rows and columns, based on the **user access rights** (i.e. a full access user may see all columns while a low-key user may only see certain columns and for a subset of data).
 
 ## Query Implementation
 Demonstrate the following query types:
