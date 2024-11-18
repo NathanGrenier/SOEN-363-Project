@@ -193,7 +193,9 @@ SELECT
     B_AWARD_COUNT
 FROM Book;
 
-CREATE VIEW v_book_limited_access AS
+CREATE VIEW v_book_limited_access 
+WITH (security_barrier = true, security_invoker = false)
+AS
 SELECT 
     B_Title,
     B_SUBTITLE,
@@ -216,7 +218,6 @@ GRANT SELECT ON v_book_unlimited_access TO GROUP unlimited_access;
 GRANT SELECT ON v_book_limited_access TO GROUP unlimited_access;
 GRANT SELECT ON v_book_limited_access TO GROUP limited_access;
 
-GRANT SELECT ON Book TO limited_access;
 GRANT SELECT ON Book TO unlimited_access;
 
 CREATE USER unlimited_user WITH PASSWORD 'password';
