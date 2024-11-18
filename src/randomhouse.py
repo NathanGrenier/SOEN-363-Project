@@ -1,7 +1,6 @@
 # API Docs Homepage: https://developer.penguinrandomhouse.com/docs/read/enhanced_prh_api
 # Test API Endpoints Online: https://developer.penguinrandomhouse.com/io-docs
 # View Available Resources: https://developer.penguinrandomhouse.com/docs/read/enhanced_prh_api/resources
-import json
 import os
 
 import requests
@@ -35,6 +34,8 @@ def fetchBookList(
 
   i = 0
   current = start
+  errorCount = 0
+  warningCount = 0
 
   while (current + increment) < total:
     current = start + (i * increment)
@@ -47,7 +48,7 @@ def fetchBookList(
       i += 1
       continue
 
-    URL = f"{API_URL}/title/domains/{API_DOMAIN}/titles"
+    BASE_URL = f"{API_URL}/title/domains/{API_DOMAIN}/titles"
     params = {
       "api_key": RANDOMHOUSE_API_KEY,
       "start": current,
@@ -55,7 +56,7 @@ def fetchBookList(
       "suppressRecordCount": True,
       "returnEmptyLists": True,
       "suppressLinks": True,
-      "formatFamily": ["Paperback", "Hardcover"],
+      "formatFamily": ["Paperback", "Hardcover", "Ebook"],
       "zoom": [
         "https://api.penguinrandomhouse.com/title/titles/dimensions/definition",
         "https://api.penguinrandomhouse.com/title/categories/definition",
@@ -63,21 +64,24 @@ def fetchBookList(
         "https://api.penguinrandomhouse.com/title/titles/keywords/definition",
       ],
     }
-    url = appendParams(URL, params)
+    url = appendParams(BASE_URL, params)
 
     try:
       response = requests.get(url)
       response.raise_for_status()
     except requests.exceptions.HTTPError as http_err:
       logger.error(f"HTTP error occurred: {http_err}")
+      errorCount += 1
       continue
     except Exception as err:
       logger.error(f"Other error occurred: {err}")
+      errorCount += 1
       continue
 
     data = response.json()
     if len(data) == 0:
       logger.warning("No data was returned for {url}")
+      warningCount += 1
       continue
     saveJSON(data, dumpPath)
 
@@ -86,6 +90,9 @@ def fetchBookList(
     )
 
     i += 1
+
+  logger.warning(f"Total number of warnings: {warningCount}")
+  logger.error(f"Total number of errors: {errorCount}")
 
 
 if __name__ == "__main__":
