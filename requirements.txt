@@ -2,3 +2,4 @@ pandas
 ruff
 python-dotenv
 requests
+psycopg[binary]
