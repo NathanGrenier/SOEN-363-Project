@@ -43,3 +43,13 @@ def loadJSON(file_path):
   with open(file_path, "r") as file:
     data = json.load(file)
   return data
+
+
+def sanitizeString(value):
+  """
+  Sanitize a string by replacing or removing characters that might cause errors in PostgreSQL.
+  """
+  if not isinstance(value, str):
+    return value
+  # return value.replace(";", " ").replace("'", " ").replace('"', " ")
+  return value.replace(";", " ")

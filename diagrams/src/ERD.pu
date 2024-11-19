@@ -38,8 +38,8 @@ entity Physical_Book {
 entity Ebook {
     PK FK B_ID: int
     --
-    EB_BUY_URL: string
-    EB_IS_GIFTABLE: boolean
+    EB_VIEWABILITY: Viewability
+    EB_WEB_READER_LINK: string
 }
 
 entity Category {

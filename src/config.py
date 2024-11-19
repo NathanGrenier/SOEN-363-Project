@@ -6,6 +6,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+DATA_PATH = "./data"
+RANDOMHOUSE_PATH = f"{DATA_PATH}/randomhouse"
+PREPARED_PATH = f"{DATA_PATH}/prepared"
+GOOGLEBOOKS_PATH = f"{DATA_PATH}/googlebooks"
+
 POSTGRES_CONFIG = {
   "host": "localhost",
   "port": 5432,
@@ -68,4 +73,6 @@ def configureLogger(name, LEVEL=logging.WARNING):
   return logger
 
 
-logger = configureLogger("logger", LEVEL=logging.DEBUG)
+logger = logging.getLogger("logger")
+if not logger.handlers:
+  logger = configureLogger("logger", LEVEL=logging.DEBUG)

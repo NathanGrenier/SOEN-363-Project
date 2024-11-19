@@ -1,19 +1,19 @@
 # API Docs Homepage: https://developer.penguinrandomhouse.com/docs/read/enhanced_prh_api
 # Test API Endpoints Online: https://developer.penguinrandomhouse.com/io-docs
 # View Available Resources: https://developer.penguinrandomhouse.com/docs/read/enhanced_prh_api/resources
+import json
 import os
 
 import requests
 from dotenv import load_dotenv
 
-from config import logger, timingDecorator
+from config import DATA_PATH, RANDOMHOUSE_PATH, logger, timingDecorator
 from utils import appendParams, saveJSON
 
 load_dotenv()
 
 API_URL = "https://api.penguinrandomhouse.com/resources/v2"
 # Directory to save data
-DATA_PATH = "./data"
 RANDOMHOUSE_API_KEY = os.getenv("RANDOMHOUSE_API_KEY")
 API_DOMAIN = "ACM.CA"
 
@@ -95,6 +95,44 @@ def fetchBookList(
   logger.error(f"Total number of errors: {errorCount}")
 
 
+def cleanIncompleteFiles(increment: int):
+  """
+  Search for JSON files in the data/randomhouse directory that have less than `increment` titles.
+  If found, delete them.
+  """
+  filesDeletedCount = 0
+
+  files = sorted(os.listdir(RANDOMHOUSE_PATH), key=lambda x: int(x.split("-")[0]))
+  for filename in files:
+    if filename.endswith(".json"):
+      path = os.path.join(RANDOMHOUSE_PATH, filename)
+      if os.path.getsize(path) == 0:
+        os.remove(path)
+        logger.info(f"File was empty. Deleted empty file: {path}")
+        filesDeletedCount += 1
+        continue
+      try:
+        with open(path, "r") as file:
+          data = json.load(file)
+          if (
+            "data" not in data
+            or "titles" not in data["data"]
+            or len(data["data"]["titles"]) < increment
+          ):
+            os.remove(path)
+            logger.info(f"Deleted incomplete file: {path}")
+            filesDeletedCount += 1
+      except json.JSONDecodeError:
+        os.remove(path)
+        logger.info(f"Deleted corrupted file: {path}")
+        filesDeletedCount += 1
+
+  logger.info(f"Total files deleted: {filesDeletedCount}")
+  if filesDeletedCount > 0:
+    logger.warning("Please re-run the script to fetch the missing data.")
+  return filesDeletedCount
+
+
 if __name__ == "__main__":
   # Fetching 25 books is ~ 300kb. We need 300mb of data. 3 fetches ~= 1mb. 3 * 300 = 900 fetches.
   # Just to be safe, multiply that by 5. Therefore, we make 4500 fetches for 112,500 (9000 * 25) books.
@@ -102,3 +140,5 @@ if __name__ == "__main__":
   TOTAL_BOOKS = 4500 * INCREMENT
 
   fetchBookList(TOTAL_BOOKS, increment=INCREMENT)
+
+  # cleanIncompleteFiles(INCREMENT)
