@@ -10,6 +10,7 @@ DATA_PATH = "./data"
 RANDOMHOUSE_PATH = f"{DATA_PATH}/randomhouse"
 PREPARED_PATH = f"{DATA_PATH}/prepared"
 GOOGLEBOOKS_PATH = f"{DATA_PATH}/googlebooks"
+# AWARD_BOOKS_PATH = f"{DATA_PATH}/manual/award"
 
 POSTGRES_CONFIG = {
   "host": "localhost",
