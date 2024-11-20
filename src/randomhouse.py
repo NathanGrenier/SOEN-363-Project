@@ -141,4 +141,4 @@ if __name__ == "__main__":
 
   fetchBookList(TOTAL_BOOKS, increment=INCREMENT)
 
-  # cleanIncompleteFiles(INCREMENT)
+  cleanIncompleteFiles(INCREMENT)
