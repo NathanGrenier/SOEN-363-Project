@@ -2,5 +2,8 @@
 .vscode/
 __pycache__/
 
+# Ignore googlebooks data (too many files ~ 90,000)
+src/data/googlebooks/*
+
 # Ignore pgdump file (can be removed if file size is < 50MB)
 data_backup.sql
