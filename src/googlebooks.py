@@ -1,5 +1,6 @@
 import json
 import os
+import time  # Add this import
 
 import requests
 from dotenv import load_dotenv
@@ -28,23 +29,29 @@ def getBookDetails(ISBN):
   BASE_URL = f"{API_URL}/volumes"
   url = appendParams(BASE_URL, params)
 
-  MAX_RETRIES = 5
+  MAX_RETRIES = 6
   for attempt in range(MAX_RETRIES):
     try:
       response = requests.get(url)
       response.raise_for_status()
       break
     except requests.exceptions.HTTPError as http_err:
-      logger.warning(
-        f"HTTP error occurred: {http_err} - Attempt {attempt + 1} of {MAX_RETRIES}"
-      )
+      if response.status_code == 429:
+        logger.warning(
+          f"HTTP error occurred: {http_err} - Attempt {attempt + 1} of {MAX_RETRIES}. Retrying after delay."
+        )
+        time.sleep(2**attempt)  # Exponential backoff
+      else:
+        logger.warning(
+          f"HTTP error occurred: {http_err} - Attempt {attempt + 1} of {MAX_RETRIES}"
+        )
     except Exception as err:
       logger.warning(
         f"Other error occurred: {err} - Attempt {attempt + 1} of {MAX_RETRIES}"
       )
     if attempt == MAX_RETRIES - 1:
       logger.error(f"Failed to get data for {ISBN} with request URL: {url}")
-      return ISBN
+      return "RateLimited"
 
   data = response.json()
 
@@ -63,6 +70,7 @@ def getBookDetails(ISBN):
 def fetchAllBookDetails(increment: int):
   totalBookCount = 0
   failedISBNs = set()
+  rateLimitedISBNs = set()
 
   files = sorted(os.listdir(RANDOMHOUSE_PATH), key=lambda x: int(x.split("-")[0]))
   for filename in files:
@@ -82,7 +90,9 @@ def fetchAllBookDetails(increment: int):
           continue
 
         result = getBookDetails(isbn)
-        if result != "Success":
+        if result == "RateLimited":
+          rateLimitedISBNs.add(isbn)
+        elif result != "Success":
           failedISBNs.add(result)
 
   if len(failedISBNs) > 0:
@@ -93,10 +103,20 @@ def fetchAllBookDetails(increment: int):
       json.dump(list(failedISBNs), file, indent=4)
     logger.info(f"Saved failed ISBNs to {failedISBNsPath}")
 
-  return failedISBNs
+  if len(rateLimitedISBNs) > 0:
+    logger.error(
+      f"Rate limited while getting data for {len(rateLimitedISBNs)}/{totalBookCount} books."
+    )
+
+    rateLimitedISBNsPath = f"{DATA_PATH}/ratelimited-isbns.json"
+    with open(rateLimitedISBNsPath, "w") as file:
+      json.dump(list(rateLimitedISBNs), file, indent=4)
+    logger.info(f"Saved rate limited ISBNs to {rateLimitedISBNsPath}")
+
+  return (failedISBNs, rateLimitedISBNs)
 
 
 if __name__ == "__main__":
   RANDOMHOUSE_INCREMENT = 25
 
-  failedISBNs = fetchAllBookDetails(RANDOMHOUSE_INCREMENT)
+  failedISBNs, rateLimitedISBNs = fetchAllBookDetails(RANDOMHOUSE_INCREMENT)
