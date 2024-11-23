@@ -8,7 +8,7 @@ import requests
 from dotenv import load_dotenv
 
 from config import DATA_PATH, RANDOMHOUSE_PATH, logger, timingDecorator
-from utils import appendParams, saveJSON
+from utils import appendParams, loadJSON, saveJSON
 
 load_dotenv()
 
@@ -133,6 +133,40 @@ def cleanIncompleteFiles(increment: int):
   return filesDeletedCount
 
 
+def removeDuplicateISBNs():
+  isbnList = set()
+  duplicates = []
+
+  files = sorted(os.listdir(RANDOMHOUSE_PATH), key=lambda x: int(x.split("-")[0]))
+  for filename in files:
+    if not filename.endswith(".json"):
+      logger.warning(f"Skipping non-JSON file: {filename}")
+      continue
+
+    filteredTitles = []
+    modified = False
+    path = os.path.join(RANDOMHOUSE_PATH, filename)
+    data = loadJSON(path)
+    for book in data["data"]["titles"]:
+      isbn = book["isbn"]
+      if isbn in isbnList:
+        data["data"]["titles"].remove(book)
+        logger.info(f"Found and removed duplicate ISBN {isbn} in {path}")
+        modified = True
+        duplicates.append(isbn)
+      else:
+        isbnList.add(isbn)
+        filteredTitles.append(book)
+
+    if modified:
+      data["data"]["titles"] = filteredTitles
+      saveJSON(data, path)
+      logger.debug(f"Saved modified data to {path}")
+
+  logger.info(f"Total duplicates removed: {len(duplicates)}")
+  return duplicates
+
+
 if __name__ == "__main__":
   # Fetching 25 books is ~ 300kb. We need 300mb of data. 3 fetches ~= 1mb. 3 * 300 = 900 fetches.
   # Just to be safe, multiply that by 5. Therefore, we make 4500 fetches for 112,500 (9000 * 25) books.
@@ -142,3 +176,5 @@ if __name__ == "__main__":
   fetchBookList(TOTAL_BOOKS, increment=INCREMENT)
 
   cleanIncompleteFiles(INCREMENT)
+
+  duplicates = removeDuplicateISBNs()
