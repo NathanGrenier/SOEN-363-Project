@@ -11,15 +11,6 @@ Repo containing the project for Concordia's Data Systems for Software Engineers 
 ## Setting Environment Variables
 Set these env variables before running any commands:
 
-PostgreSQL:
-- POSTGRES_DB
-- POSTGRES_USER
-- POSTGRES_PASSWORD
-
-PG Admin:
-- PGADMIN_DEFAULT_EMAIL
-- PGADMIN_DEFAULT_PASSWORD
-
 API: 
 - RANDOMHOUSE_API_KEY
 
@@ -112,6 +103,12 @@ pip install -r requirements.txt
 To set the Jupyter Notebook's Kernel, click the following icon and select the venv you just made.
 
 <img src="static/noterbook-kernel-picker.gif" width="600" />
+
+## Dumping PostgreSQL Database
+
+You can generate a data dump of your postgres database by using the following command: `pg_dump -U postgres -d db -f data_backup.sql --data-only --column-inserts`.
+
+You can then run the file in pgadmin to populate the database. 
 
 ## Code Formatting and Linting
 
