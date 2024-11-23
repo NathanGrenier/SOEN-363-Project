@@ -111,12 +111,6 @@ Use the following command while in the venv to install the project's dependencie
 pip install -r requirements.txt
 ```
 
-### Setting the Jupyter Notebook's Kernel
-
-To set the Jupyter Notebook's Kernel, click the following icon and select the venv you just made.
-
-<img src="static/noterbook-kernel-picker.gif" width="600" />
-
 ## Dumping PostgreSQL Database
 
 You can generate a data dump of your postgres database by using the following command: `pg_dump -U postgres -d db -f data_backup.sql --data-only --column-inserts`.
