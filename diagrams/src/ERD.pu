@@ -35,6 +35,13 @@ entity Physical_Book {
     PB_DEPTH: float
     PB_WEIGHT: float
 }
+enum Viewability {
+    PARTIAL
+    ALL_PAGES
+    NO_PAGES
+    UNKNOWN
+}
+
 entity Ebook {
     PK FK B_ID: int
     --
@@ -102,6 +109,8 @@ Book ||.right.o{ Book_Category
 Book_Category }o-right-|| Category
 
 Currency_Type -- Price
+
+Viewability -up- Ebook
 
 Book ||..o{ Price
 

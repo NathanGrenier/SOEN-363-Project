@@ -15,7 +15,7 @@ GOOGLEBOOKS_PATH = f"{DATA_PATH}/googlebooks"
 POSTGRES_CONFIG = {
   "host": "localhost",
   "port": 5432,
-  "database": os.getenv("POSTGRES_DB"),
+  "dbname": os.getenv("POSTGRES_DB"),
   "user": os.getenv("POSTGRES_USER"),
   "password": os.getenv("POSTGRES_PASSWORD"),
 }

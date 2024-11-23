@@ -5,5 +5,8 @@ __pycache__/
 # Ignore googlebooks data (too many files ~ 90,000)
 src/data/googlebooks/*
 
-# Ignore pgdump file (can be removed if file size is < 50MB)
+# Ignore pgdump file (Can't commit because file size is > 100MB)
 data_backup.sql
+
+# Other files
+insertion-progress.json
