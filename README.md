@@ -19,9 +19,9 @@ The Postgres data dump file can be found either:
 Set these env variables before running any commands:
 
 Relational Database:
-POSTGRES_DB
-POSTGRES_USER
-POSTGRES_PASSWORD
+- POSTGRES_DB
+- POSTGRES_USER
+- POSTGRES_PASSWORD
 > Look in the `docker-compose.yaml` for the db credentials
 
 API: 
