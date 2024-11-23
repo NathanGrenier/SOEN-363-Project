@@ -1,6 +1,13 @@
 # About
 Repo containing the project for Concordia's Data Systems for Software Engineers (SOEN-363) course.
 
+# Relational Database Data Dump File
+
+The Postgres data dump file can be found either:
+- In the project at `src/data/data_backup.sql`
+- Online at https://mega.nz/file/cglF1T6S#nCY-0kH13lLYo-R3SqO5ZI7Z-yf0qlQJFOas8_FL5I0
+  > Note: Mega Upload might have messed up the character encoding of the `data_dump.sql` file.
+
 ## Team Members
 
 | Name            | Student ID |
