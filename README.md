@@ -18,6 +18,12 @@ The Postgres data dump file can be found either:
 ## Setting Environment Variables
 Set these env variables before running any commands:
 
+Relational Database:
+POSTGRES_DB
+POSTGRES_USER
+POSTGRES_PASSWORD
+> Look in the `docker-compose.yaml` for the db credentials
+
 API: 
 - RANDOMHOUSE_API_KEY
 

@@ -391,22 +391,3 @@ if __name__ == "__main__":
   except Exception as e:
     logger.error(f"Database insertion process failed: {str(e)}")
     logger.info("You can restart the script to resume from the last successful file.")
-
-  # with psycopg.connect(**POSTGRES_CONFIG) as conn:
-  #   sortedPreparedFiles = sorted(
-  #     os.listdir(PREPARED_PATH), key=lambda x: int(x.split("-")[0])
-  #   )
-  #   for filename in sortedPreparedFiles:
-  #     if not filename.endswith(".json"):
-  #       logger.warning(f"Skipping non-JSON file: {filename}")
-  #       continue
-
-  #     logger.info(f"Reading prepared books from {filename}")
-
-  #     path = os.path.join(PREPARED_PATH, filename)
-  #     preparedBooks = loadJSON(path)
-
-  #     for book in preparedBooks:
-  #       logger.debug(f"Inserting book: {book['ISBN13']}")
-  #       insertBook(book, conn)
-  # logger.info("All books inserted into the database.")
