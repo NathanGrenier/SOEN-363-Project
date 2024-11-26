@@ -24,6 +24,9 @@ Relational Database:
 - POSTGRES_PASSWORD
 > Look in the `docker-compose.yaml` for the db credentials
 
+Neo4j (Graph Database):
+- NEO4J_PASSWORD
+
 API: 
 - RANDOMHOUSE_API_KEY
 

@@ -63,8 +63,6 @@ You must transfer the data from the relational database you created in Phase I i
 # Final Report
 Your final submission will include a report document that provides an overview of your system as well the data model and the approach / challenges you faces in populating the data.
 
-
-
 # Final Presentation
 Your project requires a final presentation, during which you demonstrate both databases and compare the data models. 
  

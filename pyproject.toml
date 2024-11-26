@@ -1,7 +1,7 @@
 [tool.ruff]
 # Uncomment if you want to specify what to lint / format
-include = ["pyproject.toml", "requirements.txt"]
-extend-include = ["*.ipynb"] 
+# include = ["pyproject.toml", "requirements.txt"]
+extend-include = ["*.ipynb"]
 
 # Exclude a variety of commonly ignored directories.
 exclude = [
@@ -29,10 +29,10 @@ exclude = [
     "node_modules",
     "site-packages",
     "venv",
-    "*.pdf", 
-    "*.xlsx", 
-    "*.doc", 
-    "*.csv"
+    "*.pdf",
+    "*.xlsx",
+    "*.doc",
+    "*.csv",
 ]
 
 
