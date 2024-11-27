@@ -1,5 +1,13 @@
-// Build the appropriate indexes for all queries in phase 2
+CREATE INDEX IF NOT EXISTS FOR (b:Book) ON (b.ratingsCount);
 
-// CREATE INDEX IF NOT EXISTS FOR (m:Movie) ON (m.languages);
+CREATE INDEX IF NOT EXISTS FOR (b:Book) ON (b.averageRating);
 
-// CREATE FULLTEXT INDEX moviePlots IF NOT EXISTS FOR (m:Movie) ON EACH [m.plot];
+CREATE INDEX IF NOT EXISTS FOR (b:Book) ON (b.ratingsCount, b.averageRating);
+
+CREATE INDEX IF NOT EXISTS FOR (b:Book) ON (b.publishDate);
+
+CREATE INDEX IF NOT EXISTS FOR (b:Book) ON (b.pageCount);
+
+CREATE INDEX IF NOT EXISTS FOR (c:Category) ON (c.name);
+
+CREATE FULLTEXT INDEX bookDescriptions IF NOT EXISTS FOR (b:Book) ON EACH [b.description];
