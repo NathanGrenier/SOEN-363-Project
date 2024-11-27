@@ -9,6 +9,9 @@ src/data/googlebooks/*
 # Ignore pgdump file (Can't commit because file size is > 100MB)
 data_backup.sql
 
+# Ignore postgres csv dump files (Can't commit because file size is > 100MB)
+src/data/dump/*
+
 # neo4j
 neo4j/*
 

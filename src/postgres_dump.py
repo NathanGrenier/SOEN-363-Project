@@ -2,6 +2,7 @@ import logging
 import os
 
 import psycopg
+
 from config import (
   DATA_DUMP_PATH,
   POSTGRES_CONFIG,
@@ -16,22 +17,30 @@ def export_tables_to_csv(conn, outputDir, tables):
   with conn.cursor() as cur:
     for table in tables:
       tableName = table[0]
+      isView = table[1] == "VIEW"
       outputFile = os.path.join(outputDir, f"{tableName}.csv")
 
-      sql = f"COPY {tableName} TO STDOUT WITH (FORMAT CSV, HEADER)"
+      sql = (
+        f"COPY (SELECT * FROM {tableName}) TO STDOUT WITH (FORMAT CSV, HEADER)"
+        if isView
+        else f"COPY {tableName} TO STDOUT WITH (FORMAT CSV, HEADER)"
+      )
+
       with cur.copy(sql) as copy:
         with open(outputFile, "wb") as f:
           while data := copy.read():
             f.write(data)
-      logger.debug(f"Exported table '{tableName}' to {outputFile}")
+      logger.debug(
+        f"Exported {'view' if isView else 'table'} '{tableName}' to {outputFile}"
+      )
 
 
 def get_public_tables(conn):
   with conn.cursor() as cur:
     cur.execute(
       """
-            SELECT table_name
-            FROM information_schema.tables
+            SELECT table_name, table_type
+            FROM information_schema.tables 
             WHERE table_schema = 'public'
         """
     )
