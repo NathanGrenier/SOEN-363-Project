@@ -12,6 +12,23 @@ services:
       - db-data:/var/lib/postgresql/data
     restart: always
 
+  neo4j:
+    image: neo4j:latest
+    volumes:
+      - ./neo4j/logs:/logs
+      - ./neo4j/config:/config
+      - ./neo4j/data:/data
+      - ./neo4j/plugins:/plugins
+      - ./src/data:/import # Map the data folder to neo4j's import folder
+    environment:
+      - NEO4J_AUTH=neo4j/${NEO4J_PASSWORD}
+      - NEO4J_server_directories_import=/import
+      - NEO4J_dbms_security_allow__csv__import__from__file__urls=true
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    restart: always
+
   pgadmin:
     container_name: pgadmin
     image: dpage/pgadmin4

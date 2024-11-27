@@ -15,6 +15,21 @@ The Postgres data dump file can be found either:
 | Nathan Grenier  | 40250986   |
 | Nathanial Hwong | 40243583   |
 
+## Data Models
+Below are the data model diagram of each database.
+
+### Relational Database (Postgres)
+
+<div align="center">
+  <img src="diagrams/out/postgres-data-model.png" alt="Relational Data Model" width="800">
+</div>
+
+### NoSQL Database (Neo4j)
+
+<div align="center">
+  <img src="diagrams/out/neo4j-data-model.svg" alt="NoSQL Data Model" width="800">
+</div>
+
 ## Setting Environment Variables
 Set these env variables before running any commands:
 
@@ -23,6 +38,9 @@ Relational Database:
 - POSTGRES_USER
 - POSTGRES_PASSWORD
 > Look in the `docker-compose.yaml` for the db credentials
+
+Neo4j (Graph Database):
+- NEO4J_PASSWORD
 
 API: 
 - RANDOMHOUSE_API_KEY
@@ -115,7 +133,17 @@ pip install -r requirements.txt
 
 You can generate a data dump of your postgres database by using the following command: `pg_dump -U postgres -d db -f data_backup.sql --data-only --column-inserts`.
 
-You can then run the file in pgadmin to populate the database. 
+### Populating Postgres with a Data Dump File
+In order to populate your database with data, you'll need to either run the code (which will take a long time), or download and import the data dump file in the postgres docker container through the command line.
+
+Follow the steps below to populate your postgres database (in docker):
+1. `docker cp /path/to/your/local/data_dump.sql postgres:/tmp/data_dump.sql`
+2. `docker exec -it postgres bash`
+3. From the bash terminal instance, run: `psql -U postgres -d db < /tmp/data_dump.sql`
+
+If `psql` isn't installed in the container, try these alternatives:
+1. Install psql in the container: `apt-get update && apt-get install -y postgresql-client`
+2. Use `psql` from your environment: `docker exec -i postgres psql -U postgres -d db < /path/to/your/local/data_dump.sql`
 
 ## Code Formatting and Linting
 
@@ -141,4 +169,4 @@ If you want the file to format on save, you can install the VsCode Ruff extensio
     "editor.defaultFormatter": "charliermarsh.ruff"
   }
 }
-``` 
+```

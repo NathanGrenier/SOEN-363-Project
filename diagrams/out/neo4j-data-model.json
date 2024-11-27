@@ -1,0 +1,319 @@
+﻿[
+  {
+    "nodes": [
+      {
+        "identity": -245,
+        "labels": [
+          "EBook"
+        ],
+        "properties": {
+          "name": "EBook",
+          "indexes": [],
+          "constraints": []
+        },
+        "elementId": "-245"
+      },
+      {
+        "identity": -238,
+        "labels": [
+          "Category"
+        ],
+        "properties": {
+          "name": "Category",
+          "indexes": [
+            "name"
+          ],
+          "constraints": [
+            "Constraint( id=6, name='categoryIdConstraint', type='UNIQUENESS', schema=(:Category {id}), ownedIndex=5 )"
+          ]
+        },
+        "elementId": "-238"
+      },
+      {
+        "identity": -240,
+        "labels": [
+          "Keyword"
+        ],
+        "properties": {
+          "name": "Keyword",
+          "indexes": [],
+          "constraints": [
+            "Constraint( id=20, name='keywordNameConstraint', type='UNIQUENESS', schema=(:Keyword {name}), ownedIndex=19 )",
+            "Constraint( id=10, name='keywordIdConstraint', type='UNIQUENESS', schema=(:Keyword {id}), ownedIndex=9 )"
+          ]
+        },
+        "elementId": "-240"
+      },
+      {
+        "identity": -242,
+        "labels": [
+          "Price"
+        ],
+        "properties": {
+          "name": "Price",
+          "indexes": [],
+          "constraints": [
+            "Constraint( id=18, name='priceAmountConstraint', type='UNIQUENESS', schema=(:Price {amount}), ownedIndex=17 )"
+          ]
+        },
+        "elementId": "-242"
+      },
+      {
+        "identity": -239,
+        "labels": [
+          "Award"
+        ],
+        "properties": {
+          "name": "Award",
+          "indexes": [],
+          "constraints": [
+            "Constraint( id=8, name='awardIdConstraint', type='UNIQUENESS', schema=(:Award {id}), ownedIndex=7 )"
+          ]
+        },
+        "elementId": "-239"
+      },
+      {
+        "identity": -241,
+        "labels": [
+          "Book"
+        ],
+        "properties": {
+          "name": "Book",
+          "indexes": [
+            "ratingsCount",
+            "ratingsCount,averageRating",
+            "pageCount",
+            "publishDate",
+            "description",
+            "averageRating"
+          ],
+          "constraints": [
+            "Constraint( id=12, name='bookIdConstraint', type='UNIQUENESS', schema=(:Book {id}), ownedIndex=11 )",
+            "Constraint( id=14, name='ISBN13IdConstraint', type='UNIQUENESS', schema=(:Book {isbn13}), ownedIndex=13 )"
+          ]
+        },
+        "elementId": "-241"
+      },
+      {
+        "identity": -237,
+        "labels": [
+          "Author"
+        ],
+        "properties": {
+          "name": "Author",
+          "indexes": [],
+          "constraints": [
+            "Constraint( id=4, name='authorIdConstraint', type='UNIQUENESS', schema=(:Author {id}), ownedIndex=3 )"
+          ]
+        },
+        "elementId": "-237"
+      },
+      {
+        "identity": -244,
+        "labels": [
+          "PhysicalBook"
+        ],
+        "properties": {
+          "name": "PhysicalBook",
+          "indexes": [],
+          "constraints": []
+        },
+        "elementId": "-244"
+      },
+      {
+        "identity": -243,
+        "labels": [
+          "CurrencyType"
+        ],
+        "properties": {
+          "name": "CurrencyType",
+          "indexes": [],
+          "constraints": []
+        },
+        "elementId": "-243"
+      }
+    ],
+    "relationships": [
+      {
+        "identity": -267,
+        "start": -241,
+        "end": -242,
+        "type": "COSTS",
+        "properties": {
+          "name": "COSTS"
+        },
+        "elementId": "-267",
+        "startNodeElementId": "-241",
+        "endNodeElementId": "-242"
+      },
+      {
+        "identity": -269,
+        "start": -245,
+        "end": -242,
+        "type": "COSTS",
+        "properties": {
+          "name": "COSTS"
+        },
+        "elementId": "-269",
+        "startNodeElementId": "-245",
+        "endNodeElementId": "-242"
+      },
+      {
+        "identity": -268,
+        "start": -244,
+        "end": -242,
+        "type": "COSTS",
+        "properties": {
+          "name": "COSTS"
+        },
+        "elementId": "-268",
+        "startNodeElementId": "-244",
+        "endNodeElementId": "-242"
+      },
+      {
+        "identity": -270,
+        "start": -242,
+        "end": -243,
+        "type": "IN_CURRENCY",
+        "properties": {
+          "name": "IN_CURRENCY"
+        },
+        "elementId": "-270",
+        "startNodeElementId": "-242",
+        "endNodeElementId": "-243"
+      },
+      {
+        "identity": -263,
+        "start": -244,
+        "end": -239,
+        "type": "WON",
+        "properties": {
+          "name": "WON"
+        },
+        "elementId": "-263",
+        "startNodeElementId": "-244",
+        "endNodeElementId": "-239"
+      },
+      {
+        "identity": -262,
+        "start": -241,
+        "end": -239,
+        "type": "WON",
+        "properties": {
+          "name": "WON"
+        },
+        "elementId": "-262",
+        "startNodeElementId": "-241",
+        "endNodeElementId": "-239"
+      },
+      {
+        "identity": -258,
+        "start": -237,
+        "end": -245,
+        "type": "AUTHORED",
+        "properties": {
+          "name": "AUTHORED"
+        },
+        "elementId": "-258",
+        "startNodeElementId": "-237",
+        "endNodeElementId": "-245"
+      },
+      {
+        "identity": -256,
+        "start": -237,
+        "end": -241,
+        "type": "AUTHORED",
+        "properties": {
+          "name": "AUTHORED"
+        },
+        "elementId": "-256",
+        "startNodeElementId": "-237",
+        "endNodeElementId": "-241"
+      },
+      {
+        "identity": -257,
+        "start": -237,
+        "end": -244,
+        "type": "AUTHORED",
+        "properties": {
+          "name": "AUTHORED"
+        },
+        "elementId": "-257",
+        "startNodeElementId": "-237",
+        "endNodeElementId": "-244"
+      },
+      {
+        "identity": -265,
+        "start": -244,
+        "end": -240,
+        "type": "HAS_KEYWORD",
+        "properties": {
+          "name": "HAS_KEYWORD"
+        },
+        "elementId": "-265",
+        "startNodeElementId": "-244",
+        "endNodeElementId": "-240"
+      },
+      {
+        "identity": -264,
+        "start": -241,
+        "end": -240,
+        "type": "HAS_KEYWORD",
+        "properties": {
+          "name": "HAS_KEYWORD"
+        },
+        "elementId": "-264",
+        "startNodeElementId": "-241",
+        "endNodeElementId": "-240"
+      },
+      {
+        "identity": -266,
+        "start": -245,
+        "end": -240,
+        "type": "HAS_KEYWORD",
+        "properties": {
+          "name": "HAS_KEYWORD"
+        },
+        "elementId": "-266",
+        "startNodeElementId": "-245",
+        "endNodeElementId": "-240"
+      },
+      {
+        "identity": -261,
+        "start": -245,
+        "end": -238,
+        "type": "IN_CATEGORY",
+        "properties": {
+          "name": "IN_CATEGORY"
+        },
+        "elementId": "-261",
+        "startNodeElementId": "-245",
+        "endNodeElementId": "-238"
+      },
+      {
+        "identity": -259,
+        "start": -241,
+        "end": -238,
+        "type": "IN_CATEGORY",
+        "properties": {
+          "name": "IN_CATEGORY"
+        },
+        "elementId": "-259",
+        "startNodeElementId": "-241",
+        "endNodeElementId": "-238"
+      },
+      {
+        "identity": -260,
+        "start": -244,
+        "end": -238,
+        "type": "IN_CATEGORY",
+        "properties": {
+          "name": "IN_CATEGORY"
+        },
+        "elementId": "-260",
+        "startNodeElementId": "-244",
+        "endNodeElementId": "-238"
+      }
+    ]
+  }
+]

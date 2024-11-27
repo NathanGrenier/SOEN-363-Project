@@ -3,3 +3,4 @@ ruff
 python-dotenv
 requests
 psycopg[binary]
+neo4j

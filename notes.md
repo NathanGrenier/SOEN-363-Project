@@ -39,9 +39,9 @@ Demonstrate the following query types:
 
 # Part 2
 Submit:
-- [ ] Code (data creation / population) 
-- [ ] Queries
-- [ ] Data model
+- [x] Code (data creation / population) 
+- [x] Queries
+- [x] Data model
 - [ ] Final report that provides an overview of your system as well as the approach you used and possible challenges you faced in populating data.
 ## Data Transfer
 
@@ -53,17 +53,15 @@ You must transfer the data from the relational database you created in Phase I i
 
 ## Query Implementation
 
-- [ ] A basic search query on an attribute value.
-- [ ] A query that provides some aggregate data (i.e. number of entities satisfying a criteria)
-- [ ] Find top n entities satisfying a criteria, sorted by an attribute.
-- [ ] Simulate a relational group by query in NoSQL (aggregate per category).
-- [ ] Build the appropriate indexes for previous queries, report the index creation statement and the query execution time before and after you create the index.
-- [ ] Demonstrate a full text search. Show the performance improvement by using indexes.
+- [x] A basic search query on an attribute value.
+- [x] A query that provides some aggregate data (i.e. number of entities satisfying a criteria)
+- [x] Find top n entities satisfying a criteria, sorted by an attribute.
+- [x] Simulate a relational group by query in NoSQL (aggregate per category).
+- [x] Build the appropriate indexes for previous queries, report the index creation statement and the query execution time before and after you create the index.
+- [x] Demonstrate a full text search. Show the performance improvement by using indexes.
 
 # Final Report
 Your final submission will include a report document that provides an overview of your system as well the data model and the approach / challenges you faces in populating the data.
-
-
 
 # Final Presentation
 Your project requires a final presentation, during which you demonstrate both databases and compare the data models. 

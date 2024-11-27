@@ -1,12 +1,19 @@
 .env
 .vscode/
 __pycache__/
+.ruff_cache/
 
 # Ignore googlebooks data (too many files ~ 90,000)
 src/data/googlebooks/*
 
 # Ignore pgdump file (Can't commit because file size is > 100MB)
 data_backup.sql
+
+# Ignore postgres csv dump files (Can't commit because file size is > 100MB)
+src/data/dump/*
+
+# neo4j
+neo4j/*
 
 # Other files
 insertion-progress.json

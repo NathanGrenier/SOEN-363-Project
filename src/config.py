@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 DATA_PATH = "./data"
+DATA_DUMP_PATH = f"{DATA_PATH}/dump"
 RANDOMHOUSE_PATH = f"{DATA_PATH}/randomhouse"
 PREPARED_PATH = f"{DATA_PATH}/prepared"
 GOOGLEBOOKS_PATH = f"{DATA_PATH}/googlebooks"
@@ -18,6 +19,11 @@ POSTGRES_CONFIG = {
   "dbname": os.getenv("POSTGRES_DB"),
   "user": os.getenv("POSTGRES_USER"),
   "password": os.getenv("POSTGRES_PASSWORD"),
+}
+
+NEO4J_CONFIG = {
+  "URI": "neo4j://localhost:7687",
+  "auth": ("neo4j", os.getenv("NEO4J_PASSWORD")),
 }
 
 
