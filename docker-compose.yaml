@@ -19,7 +19,7 @@ services:
       - ./neo4j/config:/config
       - ./neo4j/data:/data
       - ./neo4j/plugins:/plugins
-      - ./data:/import # Map the data folder to neo4j's import folder
+      - ./src/data:/import # Map the data folder to neo4j's import folder
     environment:
       - NEO4J_AUTH=neo4j/${NEO4J_PASSWORD}
       - NEO4J_server_directories_import=/import
