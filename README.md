@@ -45,7 +45,8 @@ Neo4j (Graph Database):
 API: 
 - RANDOMHOUSE_API_KEY
 
-## Using Docker (PostgreSQL Container)
+## Using Docker 
+### PostgreSQL Container
 > You should [install docker](https://docs.docker.com/engine/install/) for you system before starting.
 
 Both the Postgres instance and database management tool (pgAdmin) are configured in the `docker-compose.yml` file.
@@ -67,6 +68,10 @@ Both the Postgres instance and database management tool (pgAdmin) are configured
    - Enter the same password as in the `.env` file (POSTGRES_PASSWORD)
     > ![](/static/pgAdmin-Connection.png)
 
+### Neo4j Container
+The neo4j browser, an interactive window to run queries and visualize database data, can be accessed at <http://localhost:7474/browser/> after running `docker compose up`.
+
+> Make sure to set the appropriate environment variables in your `.env` file.
 ## Using plantUML
 
 In order to render ER diagrams (chen's notation), you must use the [server version](https://github.com/qjebbs/vscode-plantuml?tab=readme-ov-file#use-plantuml-server-as-render) of plantUML.
