@@ -64,6 +64,10 @@ Below are the data model diagram of each database.
   <img src="diagrams/out/neo4j-data-model.svg" alt="NoSQL Data Model" width="800">
 </div>
 
+## Project Report
+
+A report providing deeper insight into the project can be found [here](https://liveconcordia-my.sharepoint.com/:w:/g/personal/na_greni_live_concordia_ca/EZkICiiW_qJBm8_140IaOOYBDOohjzfNCtKW4_RzEg1qEg?e=iCQRNK). 
+
 # Contributing 
 
 ## Setting Environment Variables
