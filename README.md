@@ -10,38 +10,6 @@
 | Nathan Grenier  | 40250986   |
 | Nathanial Hwong | 40243583   |
 
-## Project Structure
-Each phase is **not** separated into different folders as this would break certain file imports in the code. Instead, refer to the table below to figure out what file was used in which phase of the project:
-
-| File / Folder Name                     | Project Phase |
-| -------------------------------------- | ------------- |
-| `src/config.py`                        | All Phases    |
-| `src/utils.py`                         | All Phases    |
-| `docker-compose.yaml`                  | All Phases    |
-| `requirement.txt`                      | All Phases    |
-| `diagrams/out/postgres-data-model.png` | Phase 1       |
-| `diagrams/out/neo4j-data-model.png`    | Phase 2       |
-| `src/randomhouse.py`                   | Phase 1       |
-| `src/googlebooks.py`                   | Phase 1       |
-| `src/main.py`                          | Phase 1       |
-| `src/ddl.sql`                          | Phase 1       |
-| `src/postgres_dump.py`                 | Phase 2       |
-| `src/neo4j_insert.py`                  | Phase 2       |
-| `src/indexes.cypher`                   | Phase 2       |
-| `src/constraints.cypher`               | Phase 2       |
-| `src/queries/phase1`                   | Phase 1       |
-| `src/queries/phase2`                   | Phase 2       |
-| `src/data/data_backup.sql`             | Phase 1       |
-| `src/data/failed-isbns.json`           | Phase 1       |
-| `src/data/insertion-progress.json`     | Phase 1       |
-| `src/data/ratelimited-isbns.json`      | Phase 1       |
-| `src/data/randomhouse`                 | Phase 1       |
-| `src/data/googlebooks`                 | Phase 1       |
-| `src/data/prepared`                    | Phase 1       |
-| `src/data/dump`                        | Phase 2       |
-
-> Note: This submission includes all phases (0,1,2).
-
 ## Relational Database Data Dump File
 
 The Postgres data dump file can be found either:
