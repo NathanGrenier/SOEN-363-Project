@@ -1,7 +1,24 @@
 # About
-[Repository](https://github.com/NathanGrenier/SOEN-363-Project) containing the project for Concordia's Data Systems for Software Engineers (SOEN-363) course.
 
-**Project Name:** The Library of Alexandria
+This project demonstrates the implementation of both relational (PostgreSQL) and graph-based NoSQL (Neo4j) database paradigms, showcasing advanced data modeling, API integration, and database migration techniques.
+
+## Key Features
+
+- **Dual API Integration:** Engineered a robust data collection pipeline that fetches and merges book data from the Penguin Random House and Google Books APIs, handling rate limiting and request failures gracefully
+- **Large-Scale Data Management:** Successfully processed and stored data for over 120,000 books (~500mb) with comprehensive metadata
+- **Complex Data Modeling:**
+  - **PostgreSQL:** Implemented database patterns including IS-A relationships, weak entities, and complex referential integrity constraints
+  - **Neo4j:** Developed an optimized graph structure for representing book relationships and metadata, with performance-tuned indexing
+- **Advanced Query Optimization:** Created and benchmarked various database indexes, demonstrating significant performance improvements (up to 50x faster for certain queries)
+- **Role-Based Access Control:** Implemented view-based security measures to control data access based on user privileges
+
+## Technical Highlights
+- Built with Python, PostgreSQL, Neo4j, Docker
+- Implemented transaction-based data operations for fault tolerance
+- Developed intelligent retry mechanisms for API rate limiting
+- Utilized database-specific optimization techniques:
+  - PostgreSQL: Triggers, materialized views, complex joins
+  - Neo4j: Full-text search indexes, relationship-based queries
 
 ## Team Members
 
@@ -9,13 +26,6 @@
 | --------------- | ---------- |
 | Nathan Grenier  | 40250986   |
 | Nathanial Hwong | 40243583   |
-
-## Relational Database Data Dump File
-
-The Postgres data dump file can be found either:
-- In the project at `src/data/data_backup.sql`
-- Online at https://mega.nz/file/cglF1T6S#nCY-0kH13lLYo-R3SqO5ZI7Z-yf0qlQJFOas8_FL5I0
-  > Note: Mega Upload might have messed up the character encoding of the `data_dump.sql` file.
 
 ## Data Models
 Below are the data model diagram of each database.
@@ -34,7 +44,14 @@ Below are the data model diagram of each database.
 
 ## Project Report
 
-A report providing deeper insight into the project can be found [here](https://liveconcordia-my.sharepoint.com/:w:/g/personal/na_greni_live_concordia_ca/EZkICiiW_qJBm8_140IaOOYBDOohjzfNCtKW4_RzEg1qEg?e=iCQRNK). 
+A report providing deeper insight into the project can be found [here](https://1drv.ms/w/c/4791e2766e02f96f/Eej5VmPHaGRDkwL-A2vhkeABtMbsq8oq80RLVk7jk529Cw?e=Tdd32G). 
+
+## Relational Database Data Dump File
+
+The Postgres data dump file can be found either:
+- In the project at `src/data/data_backup.sql`
+- Online at https://mega.nz/file/cglF1T6S#nCY-0kH13lLYo-R3SqO5ZI7Z-yf0qlQJFOas8_FL5I0
+  > Note: Mega Upload might have messed up the character encoding of the `data_dump.sql` file.
 
 # Contributing 
 
